@@ -1,0 +1,10 @@
+{
+  "name": "<%= app_name %>",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "bash bin/build.sh",
+    "clean": "bash bin/clean.sh",
+    "start": "gulp ts && node dist/app.js"
+  }
+}
