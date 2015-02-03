@@ -15,13 +15,13 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the stylish ' + chalk.red('Vertex') + ' generator!'
+      'Welcome to the stylish ' + chalk.red('Island') + ' generator!'
     ));
 
     var prompts = [{
       type: 'input',
       name: 'app_name',
-      message: 'edge-xxxx-vertex에서 xxx​x 자리에 들어갈 이름이 뭔가요?'
+      message: 'xxxx-island에서 xxxx 자리에 들어갈 이름이 뭔가요?'
     }, {
       type: 'list',
       name: 'type',
@@ -37,7 +37,7 @@ module.exports = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (answers) {
-      this.context = { app_name: 'edge-' + answers.app_name + '-vertex'};
+      this.context = { app_name: answers.app_name + '-island'};
       var deps = this.context.dependencies = [];
       var adapters = this.context.adapters = answers.adapters;
 
@@ -110,11 +110,11 @@ module.exports = yeoman.generators.Base.extend({
     var deps = ['bluebird', 'lodash'];
     deps.push.apply(deps, this.context.dependencies);
     // npm install
-    this.npmInstall(deps.concat(['../externals/vertex', '../externals/vertex-session-store']), {'save': true});
+    this.npmInstall(deps.concat(['../externals/island', '../externals/island-session-store']), {'save': true});
     this.npmInstall(['gulp', 'gulp-typescript', 'gulp-sourcemaps', 'event-stream'], {'saveDev': true});
     // tsd install
     var tsdDeps = deps;
-    var command = ['install', ['edge-common', 'vertex', 'vertex-session-store'].concat(deps), '-ros'];
+    var command = ['install', ['edge-common', 'island', 'island-session-store'].concat(deps), '-ros'];
     this.spawnCommand('tsd', _.flatten(command));
   }
 });

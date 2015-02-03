@@ -6,12 +6,12 @@
     %><%= code %><%
   })
 %>
-import vertex = require('vertex');
-import store = require('vertex-session-store');
+import island = require('island');
+import store = require('island-session-store');
 import common = require('edge-common');
 
-class MyVertex extends vertex.Vertex {
-  public main(options: vertex.ServiceOptions) {
+class MyIslet extends island.Islet {
+  public main(options: island.ServiceOptions) {
 
 <%
   _.forEach(adapters, function (code, adapter) {
@@ -23,4 +23,4 @@ class MyVertex extends vertex.Vertex {
   }
 }
 
-vertex.Vertex.run(MyVertex);
+island.Islet.run(MyIslet);

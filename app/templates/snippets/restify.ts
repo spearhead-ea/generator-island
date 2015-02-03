@@ -1,4 +1,4 @@
-    this.registerAdapter('restify', new vertex.RestifyAdapter({
+    this.registerAdapter('restify', new island.RestifyAdapter({
       port: 8080,
       store: sessionStore,
       secret: 'edge-secret',

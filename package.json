@@ -1,10 +1,10 @@
 {
-  "name": "generator-vertex",
-  "version": "0.0.0",
+  "name": "generator-island",
+  "version": "1.0.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "heycalmdown/generator-vertex",
+  "repository": "spearhead/generator-island",
   "author": {
     "name": "Kei Son",
     "email": "hey.calmdown@gmail.com",
