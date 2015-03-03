@@ -1,10 +1,12 @@
 {
-  "name": "<%= app_name %>",
+  "name": "<%= app_name %>-island",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "bash bin/build.sh",
-    "clean": "bash bin/clean.sh",
-    "start": "gulp ts && node dist/app.js"
+    "clean": "bash ./scripts/run.sh clean",
+    "build": "bash ./scripts/run.sh build",
+    "debug": "bash ./scripts/run.sh debug",
+    "start": "bash ./scripts/run.sh start",
+    "deploy": "bash ./scripts/run.sh deploy"
   }
 }

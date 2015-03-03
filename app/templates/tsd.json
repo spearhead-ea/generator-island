@@ -1,7 +1,0 @@
-{
-  "version": "v4",
-  "repo": "wokim/DefinitelyTyped",
-  "ref": "master",
-  "path": "typings",
-  "bundle": "typings/tsd.d.ts"
-}

@@ -1,3 +1,1 @@
-    this.registerAdapter('redis', new island.RedisConnectionAdapter({
-      port: 6379, host: 'redis'
-    }));
+    this.registerAdapter('redis', new island.RedisConnectionAdapter(config.redis));
