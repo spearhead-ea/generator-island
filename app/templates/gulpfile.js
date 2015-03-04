@@ -5,7 +5,7 @@ var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var eventStream = require('event-stream');
 
-var sources = ['./src/**/*(*.ts|!(*.d.ts))'];
+var sources = ['./src/**/*(*.ts|!(*.d.ts|*.js))'];
 function compileTypescript() {
   var tsResult = gulp.src(sources)
     .pipe(sourcemaps.init())
