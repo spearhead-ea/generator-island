@@ -68,6 +68,9 @@ deploy() {
 }
 
 start() {
+  # Build TypeScript
+  gulp ts
+
   WATCHER="./dist"
   for m in ${MODULES[*]}; do
     WATCHER+=",./node_modules/"${m}"/dist"
