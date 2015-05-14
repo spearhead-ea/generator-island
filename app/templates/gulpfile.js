@@ -1,29 +1,46 @@
 'use strict';
 
 var gulp = require('gulp');
-var ts = require('gulp-typescript');
-var sourcemaps = require('gulp-sourcemaps');
-var eventStream = require('event-stream');
+var nodemon = require('gulp-nodemon');
+var tsc = require('gulp-tsc');
+var del = require('del');
 
-var sources = ['./src/**/*(*.ts|!(*.d.ts|*.js))'];
+var sources = ['./src/**/*.ts'];
 function compileTypescript() {
-  var tsResult = gulp.src(sources)
-    .pipe(sourcemaps.init())
-    .pipe(ts({
+  gulp.src(sources)
+    .pipe(tsc({
       target: 'ES5',
       module: 'commonjs',
-      declarationFiles: true
-    }));
-  return eventStream.merge(
-    // Merge the two output streams, so this task is finished when the IO of both operations are done.
-    tsResult.dts.pipe(gulp.dest('./dist')),
-    tsResult.js.pipe(sourcemaps.write()).pipe(gulp.dest('./dist'))
-  );
+      sourcemap: true,
+      declaration: true,
+      outDir: './dist',
+      emitError: false
+    }))
+    .pipe(gulp.dest('dist/'));
 }
 
 function watch() {
-  gulp.watch(sources, ['ts']);
+  gulp.watch(sources, ['build']);
 }
 
-gulp.task('ts', compileTypescript);
+function clean(done) {
+  del(['./dist/'], done);
+}
+
+function start() {
+  nodemon({
+    verbose: true,
+    execMap: {
+      js: 'node'
+    },
+    script: 'dist/app.js',
+    watch:['./dist'],
+    ext: 'js json'
+  });
+}
+
+gulp.task('clean', clean);
+gulp.task('build', compileTypescript);
 gulp.task('watch', watch);
+gulp.task('start', start);
+gulp.task('debug', ['watch'], start);

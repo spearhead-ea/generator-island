@@ -18,7 +18,7 @@ var islandKeeper = keeper.IslandKeeper.getInst();
 var debug = island.debug('<%= app_name %>');
 
 class <%= AppName %>Islet extends island.Islet {
-  public main(config: any) {
+  public main() {
   	debug('main() method called');
 <%
   _.forEach(adapters, function (code, adapter) {
@@ -32,12 +32,12 @@ class <%= AppName %>Islet extends island.Islet {
   public start() {
     debug('start() method called');
     return super.start().then((args: any[]) => {
-      islandKeeper.registerIsland(island.argv.serviceName, {
+      islandKeeper.registerIsland(process.env.SERVICE_NAME, {
         pattern: '',
         url: url.format({
           protocol: 'http',
-          hostname: island.argv.host,
-          port: island.argv.port.toString()
+          hostname: process.env.HOST,
+          port: process.env.PORT
         })
       });
       debug('registered');
@@ -47,5 +47,5 @@ class <%= AppName %>Islet extends island.Islet {
 }
 
 debug('entrypoint');
-var serverConfig = islandKeeper.init(island.argv.etcdServer.host, island.argv.etcdServer.port).getIslandConfig();
-island.Islet.run(serverConfig, <%= AppName %>Islet);
+islandKeeper.init(process.env.ETCD_HOST || 'etcd', process.env.ETCD_PORT || 4001);
+island.Islet.run(<%= AppName %>Islet);
