@@ -32,8 +32,10 @@ class <%= AppName %>Islet extends island.Islet {
   public start() {
     debug('start() method called');
     return super.start().then((args: any[]) => {
-      islandKeeper.registerIsland(process.env.SERVICE_NAME, {
-        pattern: '',
+      var host = process.env.ETCD_HOST || 'etcd';
+      var port = process.env.ETCD_PORT || 4001;
+      islandKeeper.init(host, port).registerIsland(process.env.SERVICE_NAME, {
+        pattern: process.env.URI_PATTERN || '',
         url: url.format({
           protocol: 'http',
           hostname: process.env.HOST,
@@ -47,5 +49,4 @@ class <%= AppName %>Islet extends island.Islet {
 }
 
 debug('entrypoint');
-islandKeeper.init(process.env.ETCD_HOST || 'etcd', process.env.ETCD_PORT || 4001);
 island.Islet.run(<%= AppName %>Islet);

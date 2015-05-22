@@ -33,7 +33,7 @@ module.exports = yeoman.generators.Base.extend({
       name: 'adapters',
       message: '어떤 어댑터를 기본 설치할까요?',
       'default': [],
-      choices: ['redis', 'mongoose']
+      choices: ['redis', 'mongoose', , 'push', 'rpc', 'message-broker']
     }];
 
     this.prompt(prompts, function (answers) {
