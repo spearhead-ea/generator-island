@@ -106,6 +106,8 @@ module.exports = yeoman.generators.Base.extend({
       this.template('editorconfig', '.editorconfig');
       this.template('jshintrc', '.jshintrc');
       this.template('gulpfile.js', 'gulpfile.js');
+      this.mkdir('./spec/support');
+      this.template('spec/support/jasmine.json', 'spec/support/jasmine.json');
       this.directory(
         this.templatePath('./scripts'),
         this.destinationPath('scripts')
