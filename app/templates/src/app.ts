@@ -15,11 +15,10 @@ import url = require('url');
 
 // Local variables
 var islandKeeper = keeper.IslandKeeper.getInst();
-var debug = island.debug('<%= app_name %>');
+var debug = island.debug('ISLAND:<%= APP_NAME %>:APP');
 
 class <%= AppName %>Islet extends island.Islet {
   public main() {
-  	debug('main() method called');
 <%
   _.forEach(adapters, function (code, adapter) {
     %>
@@ -30,7 +29,7 @@ class <%= AppName %>Islet extends island.Islet {
   }
 
   public start() {
-    debug('start() method called');
+    debug('start');
     return super.start().then((args: any[]) => {
       var host = process.env.ETCD_HOST || 'etcd';
       var port = process.env.ETCD_PORT || 4001;
@@ -48,5 +47,4 @@ class <%= AppName %>Islet extends island.Islet {
   }
 }
 
-debug('entrypoint');
 island.Islet.run(<%= AppName %>Islet);

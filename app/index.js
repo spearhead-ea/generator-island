@@ -54,6 +54,7 @@ module.exports = yeoman.generators.Base.extend({
       this.context.type = answers.type;
       this.context.appName = _.camelCase(this.context.app_name);
       this.context.AppName = _.capitalize(this.context.appName);
+      this.context.APP_NAME = this.context.app_name.toUpperCase();
 
       this.mkdir(this.context.dir_name);
       this.destinationRoot(this.context.dir_name);
@@ -116,7 +117,9 @@ module.exports = yeoman.generators.Base.extend({
     var deps = ['bluebird', 'lodash'].concat(this.context.dependencies, this.context.adapters);
     _.pull(deps, 'push', 'rpc', 'message-broker');
     // npm install
-    this.npmInstall(deps.concat(['../externals/island', '../externals/island-session-store', '../externals/island-keeper']), {'saveOptional': true});
+    this.npmInstall(deps, {'save': true});
+    // NOTE: trick for using docker cache
+    this.npmInstall(['../externals/island', '../externals/island-session-store', '../externals/island-keeper'], {'saveOptional': true});
     this.npmInstall(['del', 'gulp', 'gulp-node-inspector', 'gulp-nodemon', 'gulp-tsc', 'jasmine', 'supertest'], {'saveDev': true});
     // tsd install
     //this.destinationRoot(this.context.dir_name + '/../');
