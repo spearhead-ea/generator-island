@@ -33,7 +33,7 @@ module.exports = yeoman.generators.Base.extend({
       name: 'adapters',
       message: '어떤 어댑터를 기본 설치할까요?',
       'default': [],
-      choices: ['redis', 'mongoose', , 'push', 'rpc', 'message-broker']
+      choices: ['redis', 'mongoose', 'push', 'rpc', 'message-broker']
     }];
 
     this.prompt(prompts, function (answers) {
@@ -114,9 +114,10 @@ module.exports = yeoman.generators.Base.extend({
 
   install: function () {
     var deps = ['bluebird', 'lodash'].concat(this.context.dependencies, this.context.adapters);
+    _.pull(deps, 'push', 'rpc', 'message-broker');
     // npm install
-    this.npmInstall(deps.concat(['../externals/island', '../externals/island-session-store', '../externals/island-keeper']), {'save': true});
-    this.npmInstall(['gulp', 'gulp-typescript', 'gulp-sourcemaps', 'event-stream'], {'saveDev': true});
+    this.npmInstall(deps.concat(['../externals/island', '../externals/island-session-store', '../externals/island-keeper']), {'saveOptional': true});
+    this.npmInstall(['del', 'gulp', 'gulp-node-inspector', 'gulp-nodemon', 'gulp-tsc', 'jasmine', 'supertest'], {'saveDev': true});
     // tsd install
     //this.destinationRoot(this.context.dir_name + '/../');
     //var command = ['update', '-ros'];

@@ -14,6 +14,7 @@ class <%= AppName %>Controller extends island.AbstractController<restify.Server>
     this.server.del('/<%= app_name %>', this.delete<%= AppName %>.bind(this));
 
     this.<%= appName %> = island.ModelFactory.get<<%= AppName %>>(<%= AppName %>);
+    return Promise.resolve();
   }
 
   protected get<%= AppName %>(req, res, next) {
