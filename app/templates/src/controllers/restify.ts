@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/all.d.ts" />
 import restify = require('restify');
 import island = require('island');
+import Promise = require('bluebird');
 
 import <%= AppName %> = require('../models/<%= app_name %>-model');
 
